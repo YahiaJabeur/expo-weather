@@ -1,24 +1,95 @@
-import { View, Text } from "react-native";
-import React from "react";
-import { Link } from "expo-router";
-import { useQuery } from "@tanstack/react-query";
 import { getLocation } from "@/api";
+import Input from "@/components/Input";
+import { LocationItem } from "@/components/LocationItem";
+import { STORAGE_KEYS, getStoredData, storeData } from "@/libs/localStorage";
+import { useQuery } from "@tanstack/react-query";
+import { Stack, router } from "expo-router";
+import debounce from "lodash/debounce";
+import React, { useCallback, useEffect, useState } from "react";
+import { FlatList, View } from "react-native";
+import { createStyleSheet, useStyles } from "react-native-unistyles";
 
 export default function AddLocation() {
-  const { data, isLoading } = useQuery({
-    queryKey: ["GET_LOCATION"],
+  const [location, setLocation] = useState<string>("");
+  const [isCitySelected, setIsCitySelected] = useState(false);
+  const { styles } = useStyles(stylesheet);
+
+  const { data } = useQuery({
+    queryKey: ["GET_LOCATION", location],
     queryFn: async () => {
-      return await getLocation("berlin");
+      if (location) return await getLocation(location);
+      else return [];
     },
   });
-  console.log("data", data);
+
+  useEffect(() => {
+    const checkSelectedCity = async () => {
+      try {
+        const selectedCity = await getStoredData(
+          STORAGE_KEYS.SELECTED_CITY_KEY,
+        );
+        if (selectedCity !== null) {
+          setIsCitySelected(true);
+        }
+      } catch (error) {
+        console.error("Failed to load selected city:", error);
+      }
+    };
+
+    checkSelectedCity();
+  });
+
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const debouncedSetLocation = useCallback(
+    debounce((text: string) => {
+      setLocation(text);
+    }, 500),
+    [],
+  );
+
+  const selectCity = async (locationUrl: string) => {
+    try {
+      await storeData(
+        STORAGE_KEYS.SELECTED_CITY_KEY,
+        JSON.stringify(locationUrl),
+      );
+      router.back();
+    } catch (error) {
+      console.error("Failed to store selected city:", error);
+    }
+  };
 
   return (
-    <View>
-      <Text>add screen</Text>
-      <Link href="/" asChild>
-        <Text>back</Text>
-      </Link>
+    <View style={styles.container}>
+      <Stack.Screen
+        options={{
+          title: "",
+          headerBackVisible: isCitySelected ? true : false,
+          headerShadowVisible: false,
+        }}
+      />
+      <Input
+        style={styles.input}
+        placeholder="Enter location"
+        onChangeText={debouncedSetLocation}
+      />
+      <FlatList
+        data={data}
+        renderItem={({ item }) => (
+          <LocationItem key={item.id} item={item} onPress={selectCity} />
+        )}
+      />
     </View>
   );
 }
+
+const stylesheet = createStyleSheet((theme) => ({
+  container: {
+    paddingTop: theme.paddings.xl,
+    flex: 1,
+    backgroundColor: theme.colors.background,
+  },
+  input: {
+    marginHorizontal: theme.margins.lg,
+  },
+}));
