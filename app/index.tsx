@@ -53,6 +53,7 @@ export default function Home() {
 
   return (
     <ScrollView
+      testID="home-screen"
       style={styles.container}
       contentContainerStyle={styles.contentContainer}
       refreshControl={
@@ -75,6 +76,7 @@ export default function Home() {
           <Image
             source={{ uri: `https:${data.current.condition.icon}` }}
             style={styles.icon}
+            testID="weather-icon"
           />
           <Text
             style={styles.name}
@@ -91,10 +93,10 @@ export default function Home() {
           >{`Feels like ${data.current.feelslike_c} °C`}</Text>
           {memoizedMeasurements && (
             <View style={styles.forecastWrapper}>
-              {memoizedMeasurements.map((measurement, index) => {
+              {memoizedMeasurements.map((measurement) => {
                 return (
                   <ForecastItem
-                    testID={`forecast-${index}`}
+                    testID={`forecast-${measurement.time}`}
                     key={measurement.time}
                     item={measurement}
                   />
