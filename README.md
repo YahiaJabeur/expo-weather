@@ -3,9 +3,10 @@
 ## Table of Contents
 
 - [Introduction](#introduction)
-- [Features](#features)
+- [Screen recording](#screen-recording)
+- [Why Expo?](#why-expo)
+- [File-Based Routing with Expo Router](#file-based-routing-with-expo-router)
 - [Installation](#installation)
-- [Usage](#usage)
 
 
 ## Introduction
