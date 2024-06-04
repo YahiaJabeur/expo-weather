@@ -1,0 +1,86 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<View
+  accessibilityLabel="Location: Berlin, Berlin, Germany"
+  accessibilityState={
+    {
+      "busy": undefined,
+      "checked": undefined,
+      "disabled": undefined,
+      "expanded": undefined,
+      "selected": undefined,
+    }
+  }
+  accessibilityValue={
+    {
+      "max": undefined,
+      "min": undefined,
+      "now": undefined,
+      "text": undefined,
+    }
+  }
+  accessible={true}
+  collapsable={false}
+  focusable={true}
+  onClick={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    {
+      "borderBottomWidth": 1,
+      "borderColor": "#bbbbbb",
+      "flexDirection": "row",
+      "justifyContent": "space-between",
+      "opacity": 1,
+      "paddingHorizontal": 8,
+      "paddingVertical": 12,
+    }
+  }
+>
+  <View
+    style={
+      {
+        "flexDirection": "column",
+        "marginRight": 4,
+      }
+    }
+  >
+    <Text
+      style={
+        {
+          "color": "#000000",
+          "fontSize": 18,
+          "fontWeight": "bold",
+          "marginBottom": 8,
+        }
+      }
+    >
+      Berlin
+    </Text>
+    <Text
+      style={
+        {
+          "alignSelf": "flex-start",
+          "color": "#555555",
+        }
+      }
+    >
+      Berlin
+    </Text>
+  </View>
+  <Text
+    style={
+      {
+        "color": "#6db0f7",
+      }
+    }
+  >
+    Germany
+  </Text>
+</View>
+`;

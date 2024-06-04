@@ -1,0 +1,51 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<View
+  accessibilityLabel="Forecast at 00:00: 15.5 degrees Celsius"
+  style={
+    {
+      "alignItems": "center",
+      "flexDirection": "column",
+      "marginHorizontal": 8,
+    }
+  }
+>
+  <Image
+    accessibilityLabel="Weather condition: Clear "
+    source={
+      {
+        "uri": "https://cdn.weatherapi.com/weather/64x64/night/113.png",
+      }
+    }
+    style={
+      {
+        "height": 50,
+        "width": 50,
+      }
+    }
+  />
+  <Text
+    style={
+      {
+        "color": "#000000",
+        "fontSize": 16,
+        "marginBottom": 8,
+      }
+    }
+  >
+    15.5 °C
+  </Text>
+  <Text
+    style={
+      {
+        "color": "#000000",
+        "fontSize": 12,
+        "marginBottom": 8,
+      }
+    }
+  >
+    00:00
+  </Text>
+</View>
+`;

@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<TextInput
+  style={
+    [
+      {
+        "borderColor": "#3498db",
+        "borderRadius": 4,
+        "borderWidth": 1,
+        "fontSize": 16,
+        "marginBottom": 2,
+        "padding": 8,
+      },
+      undefined,
+    ]
+  }
+/>
+`;
