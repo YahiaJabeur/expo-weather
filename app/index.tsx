@@ -1,6 +1,7 @@
 import { getForecast } from "@/api";
 // import { DevButton } from "@/components/DevButton";
 import { ForecastItem } from "@/components/ForecastItem";
+import { QUERY_KEYS } from "@/constants/queries";
 import { STORAGE_KEYS, getStoredData } from "@/libs/localStorage";
 import { getNextMeasurements } from "@/utils/getNextMeasurements";
 import { Feather } from "@expo/vector-icons";
@@ -14,17 +15,18 @@ export default function Home() {
   const { styles } = useStyles(stylesheet);
   const [location, setLocation] = useState<string | null>(null);
 
-  const { data, isLoading } = useQuery({
-    queryKey: ["GET_WEATHER", location],
+  const { data, isLoading, refetch } = useQuery({
+    queryKey: [QUERY_KEYS.GET_FORECAST, location],
     queryFn: async () => {
       if (location) return await getForecast(location);
       else return null;
     },
   });
 
-  const fetchWeather = async () => {
+  const checkStoreLocation = async () => {
     try {
       const storedCity = await getStoredData(STORAGE_KEYS.SELECTED_CITY_KEY);
+
       if (storedCity) {
         setLocation(storedCity);
       } else {
@@ -37,7 +39,7 @@ export default function Home() {
 
   useFocusEffect(
     useCallback(() => {
-      fetchWeather();
+      checkStoreLocation();
     }, []),
   );
 
@@ -57,7 +59,7 @@ export default function Home() {
       style={styles.container}
       contentContainerStyle={styles.contentContainer}
       refreshControl={
-        <RefreshControl refreshing={isLoading} onRefresh={fetchWeather} />
+        <RefreshControl refreshing={isLoading} onRefresh={refetch} />
       }
     >
       <Stack.Screen

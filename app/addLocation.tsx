@@ -1,6 +1,7 @@
 import { getLocation } from "@/api";
 import Input from "@/components/Input";
 import { LocationItem } from "@/components/LocationItem";
+import { QUERY_KEYS } from "@/constants/queries";
 import { STORAGE_KEYS, getStoredData, storeData } from "@/libs/localStorage";
 import { useQuery } from "@tanstack/react-query";
 import { Stack, router } from "expo-router";
@@ -15,7 +16,7 @@ export default function AddLocation() {
   const { styles } = useStyles(stylesheet);
 
   const { data } = useQuery({
-    queryKey: ["GET_LOCATION", location],
+    queryKey: [QUERY_KEYS.GET_LOCATION, location],
     queryFn: async () => {
       if (location) return await getLocation(location);
       else return [];
