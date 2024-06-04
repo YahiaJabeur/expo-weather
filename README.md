@@ -1,50 +1,64 @@
-# Welcome to your Expo app 👋
+# Expo React Native Weather Application
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+## Table of Contents
 
-## Get started
+- [Introduction](#introduction)
+- [Features](#features)
+- [Installation](#installation)
+- [Usage](#usage)
 
-1. Install dependencies
+
+## Introduction
+
+Welcome to Expo-Weather App! This Expo React Native application brings you precise and up-to-date weather information. With a simple interface, WeatherApp offers the following features:
+
+- **Search Location**: Easily find the weather for any location worldwide.
+- **Current Weather and 5-Day Forecast**: Get real-time weather updates and a detailed 5-day forecast.
+- **Save Locations**: Save your location for quick access to their weather conditions.
+- **Modify Saved Locations**: Update saved location.
+
+
+### Screen recording
+
+<img src="./assets/expo-weather.gif" alt="Alt text" width="230">
+
+## Why Expo?
+
+This project uses [Expo](https://expo.dev/) because it is now recommended by React Native contributors as of the latest conference. Expo simplifies the development process by providing a set of tools and services that are well-integrated with React Native, ensuring a smoother and more efficient workflow.
+
+## File-Based Routing with Expo Router
+
+This project uses `expo-router` for navigation, leveraging file-based routing for an intuitive and organized structure. The screen files are named according to `expo-router` conventions, ensuring consistency and clarity in the project.
+
+### Key Features of Expo Router:
+- **File-Based Routing**: Each screen corresponds to a file, making navigation straightforward and maintenance easier.
+- **Naming Conventions**: Screens are named following `expo-router` conventions. This means that the file names directly reflect the routes, providing a clear and predictable routing system.
+
+## Installation
+
+### Prerequisites
+
+- Node.js
+- Expo CLI
+
+### Steps
+
+1. Clone the repository:
+
+   ```bash
+   git clone git@github.com:YahiaJabeur/expo-weather.git
+   cd expo-contact-manager
+
+2. Install dependencies:
 
    ```bash
    npm install
-   ```
 
-2. Start the app
-
+3. Run iOS App:
    ```bash
-    npx expo start
-   ```
+   npx expo run:ios
 
-In the output, you'll find options to open the app in a
+4. Run Android App:
+   ```bash
+   npx expo run:android
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
-
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
-
-```bash
-npm run reset-project
-```
-
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
-
-## Learn more
-
-To learn more about developing your project with Expo, look at the following resources:
-
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
