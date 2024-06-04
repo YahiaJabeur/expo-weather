@@ -8,6 +8,10 @@ import { renderRouter, screen, waitFor } from "expo-router/testing-library";
 import AddLocation from "@/app/addLocation";
 import { ReactComponent } from "expo-router/build/testing-library/context-stubs";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { getForecast } from "../api";
+import { forecast } from "@/Mocks/forecast";
+
+jest.mock("../api");
 
 const Wrapper = (Component: ReactComponent) =>
   jest.fn(() => {
@@ -47,14 +51,70 @@ describe("Home screen", () => {
     });
   });
 
-  it("should start application in Home screen when location is already selected and stored", async () => {
-    // @ts-ignore
-    AsyncStorage.getItem.mockResolvedValueOnce("Berlin");
+  describe("when location is already selected and stored", () => {
+    it("should start application in Home screen", async () => {
+      // @ts-ignore
+      AsyncStorage.getItem.mockResolvedValueOnce("Berlin");
 
-    renderer();
+      renderer();
 
-    await waitFor(() => {
-      expect(screen).toHavePathname("/");
+      await waitFor(() => {
+        expect(screen).toHavePathname("/");
+      });
+    });
+
+    it("should call getForecast api", async () => {
+      // @ts-ignore
+      AsyncStorage.getItem.mockResolvedValueOnce("Berlin");
+
+      renderer();
+
+      expect(getForecast).toHaveBeenCalledTimes(1);
+    });
+
+    it("should display 5 next days weather", async () => {
+      // @ts-ignore
+      AsyncStorage.getItem.mockResolvedValueOnce("Berlin");
+      // @ts-ignore
+      getForecast.mockResolvedValueOnce(forecast);
+
+      renderer();
+
+      await waitFor(async () => {
+        expect(screen.getAllByTestId(/forecast-/).length).toBe(5);
+      });
+    });
+
+    it("should display the current weather details", async () => {
+      // @ts-ignore
+      AsyncStorage.getItem.mockResolvedValueOnce("Berlin");
+      // @ts-ignore
+      getForecast.mockResolvedValueOnce(forecast);
+
+      renderer();
+
+      await waitFor(async () => {
+        // @ts-ignore
+        expect(screen.getByTestId("temperature")).toHaveTextContent("21°C");
+      });
+      await waitFor(async () => {
+        // @ts-ignore
+        expect(screen.getByTestId("location-name")).toHaveTextContent(
+          "Tunis, Tunisia",
+        );
+      });
+      await waitFor(async () => {
+        // @ts-ignore
+        expect(screen.getByTestId("feels-like")).toHaveTextContent(
+          "Feels like 21 °C",
+        );
+      });
+      await waitFor(async () => {
+        const image = screen.getByTestId("weather-icon");
+        expect(image.props.source).toEqual({
+          uri: "https://cdn.weatherapi.com/weather/64x64/night/116.png",
+        });
+      });
     });
   });
 });

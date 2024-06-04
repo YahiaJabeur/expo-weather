@@ -84,7 +84,7 @@ export default function Home() {
             style={styles.name}
             testID="location-name"
           >{`${data.location.name}, ${data.location.country}`}</Text>
-          <View style={styles.tempContainer}>
+          <View testID="temperature" style={styles.tempContainer}>
             <Text style={styles.temp}>{`${data.current.temp_c}`}</Text>
             <Text style={styles.unit}>°C</Text>
           </View>
@@ -95,10 +95,10 @@ export default function Home() {
           >{`Feels like ${data.current.feelslike_c} °C`}</Text>
           {memoizedMeasurements && (
             <View style={styles.forecastWrapper}>
-              {memoizedMeasurements.map((measurement) => {
+              {memoizedMeasurements.map((measurement, index) => {
                 return (
                   <ForecastItem
-                    testID={`forecast-${measurement.time}`}
+                    testID={`forecast-${index}`}
                     key={measurement.time}
                     item={measurement}
                   />
