@@ -12,9 +12,6 @@
     "lint": "expo lint",
     "lint:fix": "eslint . --fix"
   },
-  "jest": {
-    "preset": "jest-expo"
-  },
   "dependencies": {
     "@expo/vector-icons": "^14.0.0",
     "@react-navigation/native": "^6.0.2",
