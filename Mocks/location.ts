@@ -7,3 +7,51 @@ export const location = {
   lon: 13.4,
   url: "berlin-berlin-germany",
 };
+
+export const locations = [
+  {
+    id: 568120,
+    name: "Berlin",
+    region: "Berlin",
+    country: "Germany",
+    lat: 52.52,
+    lon: 13.4,
+    url: "berlin-berlin-germany",
+  },
+  {
+    id: 2322383,
+    name: "Berlin",
+    region: "Usulutan",
+    country: "El Salvador",
+    lat: 13.5,
+    lon: -88.53,
+    url: "berlin-usulutan-el-salvador",
+  },
+  {
+    id: 2610505,
+    name: "Berlin",
+    region: "New Hampshire",
+    country: "United States of America",
+    lat: 44.47,
+    lon: -71.19,
+    url: "berlin-new-hampshire-united-states-of-america",
+  },
+  {
+    id: 920098,
+    name: "Berlin",
+    region: "Santa Barbara",
+    country: "Honduras",
+    lat: 14.83,
+    lon: -88.5,
+    url: "berlin-santa-barbara-honduras",
+  },
+  {
+    id: 3165286,
+    name: "Berlin",
+    region: "Veracruz-Llave",
+    country: "Mexico",
+    lat: 18.92,
+    lon: -96.92,
+    url: "berlin-veracruz-llave-mexico",
+  },
+];

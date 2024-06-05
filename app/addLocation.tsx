@@ -61,6 +61,7 @@ export default function AddLocation() {
     <View testID="add-location-screen" style={styles.container}>
       <Stack.Screen
         options={{
+          title: "",
           headerStyle: { backgroundColor: theme.colors.background },
           headerBackVisible: isCitySelected ? true : false,
           headerShadowVisible: false,
