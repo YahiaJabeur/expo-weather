@@ -1,5 +1,4 @@
 import { getForecast } from "@/api";
-// import { DevButton } from "@/components/DevButton";
 import { ForecastItem } from "@/components/ForecastItem";
 import { QUERY_KEYS } from "@/constants/queries";
 import { STORAGE_KEYS, getStoredData } from "@/libs/localStorage";
@@ -110,7 +109,6 @@ export default function Home() {
           )}
         </>
       )}
-      {/* <DevButton /> */}
     </ScrollView>
   );
 }
