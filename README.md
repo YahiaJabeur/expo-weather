@@ -11,7 +11,7 @@
 
 ## Introduction
 
-Welcome to Expo-Weather App! This Expo React Native application brings you precise and up-to-date weather information. With a simple interface, WeatherApp offers the following features:
+Welcome to Expo-Weather App! This Expo React Native application brings you precise and up-to-date weather information. With a simple interface, Expo-Weather App offers the following features:
 
 - **Search Location**: Easily find the weather for any location worldwide.
 - **Current Weather and 5-Day Forecast**: Get real-time weather updates and a detailed 5-day forecast.
@@ -48,7 +48,7 @@ This project uses `expo-router` for navigation, leveraging file-based routing fo
 
    ```bash
    git clone git@github.com:YahiaJabeur/expo-weather.git
-   cd expo-contact-manager
+   cd expo-weather
 
 2. Install dependencies:
 
