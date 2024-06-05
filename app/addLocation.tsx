@@ -13,7 +13,7 @@ import { createStyleSheet, useStyles } from "react-native-unistyles";
 export default function AddLocation() {
   const [location, setLocation] = useState<string>("");
   const [isCitySelected, setIsCitySelected] = useState(false);
-  const { styles } = useStyles(stylesheet);
+  const { styles, theme } = useStyles(stylesheet);
 
   const { data } = useQuery({
     queryKey: [QUERY_KEYS.GET_LOCATION, location],
@@ -50,10 +50,7 @@ export default function AddLocation() {
 
   const selectCity = async (locationUrl: string) => {
     try {
-      await storeData(
-        STORAGE_KEYS.SELECTED_CITY_KEY,
-        JSON.stringify(locationUrl),
-      );
+      await storeData(STORAGE_KEYS.SELECTED_CITY_KEY, locationUrl);
       router.back();
     } catch (error) {
       console.error("Failed to store selected city:", error);
@@ -61,23 +58,29 @@ export default function AddLocation() {
   };
 
   return (
-    <View style={styles.container}>
+    <View testID="add-location-screen" style={styles.container}>
       <Stack.Screen
         options={{
-          title: "",
+          headerStyle: { backgroundColor: theme.colors.background },
           headerBackVisible: isCitySelected ? true : false,
           headerShadowVisible: false,
         }}
       />
       <Input
+        testID="location-input"
         style={styles.input}
         placeholder="Enter location"
         onChangeText={debouncedSetLocation}
       />
       <FlatList
         data={data}
-        renderItem={({ item }) => (
-          <LocationItem key={item.id} item={item} onPress={selectCity} />
+        renderItem={({ item, index }) => (
+          <LocationItem
+            testID={`location-item-${index}`}
+            key={item.id}
+            item={item}
+            onPress={selectCity}
+          />
         )}
       />
     </View>
@@ -92,5 +95,6 @@ const stylesheet = createStyleSheet((theme) => ({
   },
   input: {
     marginHorizontal: theme.margins.lg,
+    color: theme.colors.typography,
   },
 }));

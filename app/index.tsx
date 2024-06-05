@@ -12,7 +12,7 @@ import { Image, RefreshControl, ScrollView, Text, View } from "react-native";
 import { createStyleSheet, useStyles } from "react-native-unistyles";
 
 export default function Home() {
-  const { styles } = useStyles(stylesheet);
+  const { styles, theme } = useStyles(stylesheet);
   const [location, setLocation] = useState<string | null>(null);
 
   const { data, isLoading, refetch } = useQuery({
@@ -64,11 +64,13 @@ export default function Home() {
     >
       <Stack.Screen
         options={{
+          headerTitleStyle: { color: theme.colors.typography },
+          headerStyle: { backgroundColor: theme.colors.background },
           title: data ? data?.location.name : "",
           headerShadowVisible: false,
           headerRight: () => (
             <Link testID="change-location" href="/addLocation">
-              <Feather name="edit" size={24} color="black" />
+              <Feather name="edit" size={24} color={theme.colors.typography} />
             </Link>
           ),
         }}
