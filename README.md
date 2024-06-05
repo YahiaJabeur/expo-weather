@@ -6,6 +6,8 @@
 - [Screen recording](#screen-recording)
 - [Why Expo?](#why-expo)
 - [File-Based Routing with Expo Router](#file-based-routing-with-expo-router)
+- [Dark and Light Mode Support](#dark-and-light-mode-support)
+- [Styling with react-native-unistyles](#styling-with-react-native-unistyles)
 - [Installation](#installation)
 
 
@@ -46,13 +48,17 @@ Expo Weather App supports both dark and light modes, providing an optimal viewin
 
 ## Styling with react-native-unistyles
 
-This project uses `react-native-unistyles` for styling, offering several benefits:
+This project uses [`react-native-unistyles`](https://reactnativeunistyles.vercel.app/) for styling, offering several benefits:
 
+- **Crazy performance**: Shared core with C++ and JSI bindings
 - **Unified Styling**: Provides a consistent and unified approach to styling across the app.
-- **Theme Support**: Easily switch between dark and light themes, ensuring a seamless and cohesive user experience.
+- **Theme Support**: Easily switch between dark and light themes.
+- **Cross platform support**: iOS, Android, Expo, Web, macOS, Windows, tvOS, visionOS and SSR.
 - **Improved Maintainability**: Simplifies style management, making it easier to maintain and scale the app.
+- **TypeScript first support**: Always get perfect Intellisense
 
-With `react-native-unistyles`, WeatherApp delivers a polished and adaptable user interface that enhances usability and aesthetic appeal.
+
+
 
 ## Installation
 
