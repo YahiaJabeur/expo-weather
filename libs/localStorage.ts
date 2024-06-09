@@ -1,17 +1,19 @@
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import { MMKV } from "react-native-mmkv";
 
 export enum STORAGE_KEYS {
   SELECTED_CITY_KEY = "LOCATION_KEY",
 }
 
-export const storeData = async (key: STORAGE_KEYS, value: string) => {
-  return await AsyncStorage.setItem(key, value);
+export const storage = new MMKV();
+
+export const storeData = (key: STORAGE_KEYS, value: string) => {
+  return storage.set(key, value);
 };
 
-export const getStoredData = async (key: STORAGE_KEYS) => {
-  return await AsyncStorage.getItem(key);
+export const getStoredData = (key: STORAGE_KEYS) => {
+  return storage.getString(key);
 };
 
-export const clearStorage = async () => {
-  return await AsyncStorage.clear();
+export const clearStorage = () => {
+  return storage.clearAll();
 };

@@ -24,21 +24,15 @@ export default function AddLocation() {
   });
 
   useEffect(() => {
-    const checkSelectedCity = async () => {
-      try {
-        const selectedCity = await getStoredData(
-          STORAGE_KEYS.SELECTED_CITY_KEY,
-        );
-        if (selectedCity !== null) {
-          setIsCitySelected(true);
-        }
-      } catch (error) {
-        console.error("Failed to load selected city:", error);
+    try {
+      const selectedCity = getStoredData(STORAGE_KEYS.SELECTED_CITY_KEY);
+      if (selectedCity !== undefined) {
+        setIsCitySelected(true);
       }
-    };
-
-    checkSelectedCity();
-  });
+    } catch (error) {
+      console.error("Failed to load selected city:", error);
+    }
+  }, []);
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const debouncedSetLocation = useCallback(
@@ -50,7 +44,7 @@ export default function AddLocation() {
 
   const selectCity = async (locationUrl: string) => {
     try {
-      await storeData(STORAGE_KEYS.SELECTED_CITY_KEY, locationUrl);
+      storeData(STORAGE_KEYS.SELECTED_CITY_KEY, locationUrl);
       router.back();
     } catch (error) {
       console.error("Failed to store selected city:", error);

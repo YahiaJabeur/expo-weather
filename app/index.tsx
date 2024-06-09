@@ -1,4 +1,5 @@
 import { getForecast } from "@/api";
+import { DevButton } from "@/components/DevButton";
 import { ForecastItem } from "@/components/ForecastItem";
 import { QUERY_KEYS } from "@/constants/queries";
 import { STORAGE_KEYS, getStoredData } from "@/libs/localStorage";
@@ -24,7 +25,7 @@ export default function Home() {
 
   const checkStoreLocation = async () => {
     try {
-      const storedCity = await getStoredData(STORAGE_KEYS.SELECTED_CITY_KEY);
+      const storedCity = getStoredData(STORAGE_KEYS.SELECTED_CITY_KEY);
 
       if (storedCity) {
         setLocation(storedCity);
@@ -44,6 +45,7 @@ export default function Home() {
 
   const memoizedMeasurements = useMemo(() => {
     if (data) {
+      // TODO
       const measurement = [
         ...data.forecast.forecastday[0].hour,
         ...data.forecast.forecastday[1].hour,
@@ -109,6 +111,7 @@ export default function Home() {
           )}
         </>
       )}
+      <DevButton />
     </ScrollView>
   );
 }
