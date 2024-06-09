@@ -7,23 +7,29 @@ const api = axios.create({
   baseURL: BASE_URL,
 });
 
+api.interceptors.request.use((config) => {
+  if (!config.params) {
+    config.params = {};
+  }
+  config.params.key = API_KEY;
+  return config;
+});
+
 export const getLocation = async (location: string): Promise<City[]> => {
-  const { data } = await api.get(`/search.json?key=${API_KEY}&q=${location}`);
+  const { data } = await api.get(`/search.json?q=${location}`);
   return data;
 };
 
 export const getCurrentWeather = async (
   locationUrl: string,
 ): Promise<CurrentWeather> => {
-  const { data } = await api.get(
-    `/current.json?key=${API_KEY}&q=${locationUrl}&aqi=no`,
-  );
+  const { data } = await api.get(`/current.json?q=${locationUrl}&aqi=no`);
   return data;
 };
 
 export const getForecast = async (locationUrl: string): Promise<Forecast> => {
   const { data } = await api.get(
-    `/forecast.json?key=${API_KEY}&q=${locationUrl}&days=2&aqi=no&alerts=no`,
+    `/forecast.json?q=${locationUrl}&days=2&aqi=no&alerts=no`,
   );
   return data;
 };
