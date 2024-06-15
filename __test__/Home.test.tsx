@@ -5,11 +5,12 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import Home from "@/app/index";
 
 import { renderRouter, screen, waitFor } from "expo-router/testing-library";
-import AddLocation from "@/app/addLocation";
 import { ReactComponent } from "expo-router/build/testing-library/context-stubs";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import { getForecast } from "../api";
 import { forecast } from "@/Mocks/forecast";
+import { STORAGE_KEYS, storeData } from "@/libs/localStorage";
+import AddLocation from "@/app/addLocation";
+import app from "@/app/index";
 
 jest.mock("../api");
 
@@ -27,7 +28,8 @@ const Wrapper = (Component: ReactComponent) =>
 const renderer = () =>
   renderRouter(
     {
-      "/": Wrapper(Home),
+      "/": Wrapper(app),
+      home: Wrapper(Home),
       addLocation: Wrapper(AddLocation),
     },
     {
@@ -36,45 +38,45 @@ const renderer = () =>
   );
 
 describe("Home screen", () => {
-  it("should render correctly", async () => {
-    renderer();
-
-    expect(screen).toHavePathname("/");
-    expect(screen.getByTestId("home-screen")).toBeDefined();
+  beforeAll(() => {
+    // clearStorage();
   });
 
-  it("should redirect to Add location screen when no location is not selected", async () => {
+  test("should render correctly", async () => {
     renderer();
 
-    await waitFor(() => {
-      expect(screen).toHavePathname("/addLocation");
-    });
+    expect(screen).toHavePathname("/addLocation");
+    expect(screen.getByTestId("add-location-screen")).toBeDefined();
+  });
+
+  test("should redirect to Add location screen when no location is not selected", async () => {
+    renderer();
+
+    expect(screen).toHavePathname("/addLocation");
   });
 
   describe("when location is already selected and stored", () => {
-    it("should start application in Home screen", async () => {
-      // @ts-ignore
-      AsyncStorage.getItem.mockResolvedValueOnce("Berlin");
+    test("should start application in Home screen", async () => {
+      storeData(STORAGE_KEYS.SELECTED_CITY_KEY, "Berlin");
 
       renderer();
 
-      await waitFor(() => {
-        expect(screen).toHavePathname("/");
-      });
+      expect(screen).toHavePathname("/home");
     });
 
-    it("should call getForecast api", async () => {
+    test("should call getForecast api", async () => {
       // @ts-ignore
-      AsyncStorage.getItem.mockResolvedValueOnce("Berlin");
+      // AsyncStorage.getItem.mockResolvedValueOnce("Berlin");
+      storeData(STORAGE_KEYS.SELECTED_CITY_KEY, "Berlin");
 
       renderer();
 
       expect(getForecast).toHaveBeenCalledTimes(1);
     });
 
-    it("should display 5 next days weather", async () => {
-      // @ts-ignore
-      AsyncStorage.getItem.mockResolvedValueOnce("Berlin");
+    test("should display 5 next days weather", async () => {
+      storeData(STORAGE_KEYS.SELECTED_CITY_KEY, "Berlin");
+
       // @ts-ignore
       getForecast.mockResolvedValueOnce(forecast);
 
@@ -85,9 +87,10 @@ describe("Home screen", () => {
       });
     });
 
-    it("should display the current weather details", async () => {
+    test("should display the current weather details", async () => {
       // @ts-ignore
-      AsyncStorage.getItem.mockResolvedValueOnce("Berlin");
+      // AsyncStorage.getItem.mockResolvedValueOnce("Berlin");
+      storeData(STORAGE_KEYS.SELECTED_CITY_KEY, "Berlin");
       // @ts-ignore
       getForecast.mockResolvedValueOnce(forecast);
 

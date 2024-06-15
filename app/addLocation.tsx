@@ -2,37 +2,23 @@ import { getLocation } from "@/api";
 import Input from "@/components/Input";
 import { LocationItem } from "@/components/LocationItem";
 import { QUERY_KEYS } from "@/constants/queries";
-import { STORAGE_KEYS, getStoredData, storeData } from "@/libs/localStorage";
+import { STORAGE_KEYS, storeData } from "@/libs/localStorage";
 import { useQuery } from "@tanstack/react-query";
 import { Stack, router } from "expo-router";
 import debounce from "lodash/debounce";
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useState } from "react";
 import { FlatList, View } from "react-native";
 import { createStyleSheet, useStyles } from "react-native-unistyles";
 
 export default function AddLocation() {
   const [location, setLocation] = useState<string>("");
-  const [isCitySelected, setIsCitySelected] = useState(false);
   const { styles, theme } = useStyles(stylesheet);
 
   const { data } = useQuery({
+    enabled: !!location,
     queryKey: [QUERY_KEYS.GET_LOCATION, location],
-    queryFn: async () => {
-      if (location) return await getLocation(location);
-      else return [];
-    },
+    queryFn: () => getLocation(location),
   });
-
-  useEffect(() => {
-    try {
-      const selectedCity = getStoredData(STORAGE_KEYS.SELECTED_CITY_KEY);
-      if (selectedCity !== undefined) {
-        setIsCitySelected(true);
-      }
-    } catch (error) {
-      console.error("Failed to load selected city:", error);
-    }
-  }, []);
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const debouncedSetLocation = useCallback(
@@ -45,7 +31,11 @@ export default function AddLocation() {
   const selectCity = async (locationUrl: string) => {
     try {
       storeData(STORAGE_KEYS.SELECTED_CITY_KEY, locationUrl);
-      router.back();
+      if (router.canGoBack()) {
+        router.back();
+      } else {
+        router.replace("home");
+      }
     } catch (error) {
       console.error("Failed to store selected city:", error);
     }
@@ -57,7 +47,6 @@ export default function AddLocation() {
         options={{
           title: "",
           headerStyle: { backgroundColor: theme.colors.background },
-          headerBackVisible: isCitySelected ? true : false,
           headerShadowVisible: false,
         }}
       />
@@ -69,10 +58,11 @@ export default function AddLocation() {
       />
       <FlatList
         data={data}
+        keyExtractor={(item) => item.id.toString()}
         renderItem={({ item, index }) => (
           <LocationItem
             testID={`location-item-${index}`}
-            key={item.id}
+            // key={item.id}
             item={item}
             onPress={selectCity}
           />

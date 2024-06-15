@@ -1,6 +1,7 @@
 import React from "react";
 
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { MMKV } from "react-native-mmkv";
 
 import Home from "@/app/index";
 
@@ -10,11 +11,10 @@ import {
   screen,
   waitFor,
 } from "expo-router/testing-library";
-import AddLocation from "@/app/addLocation";
 import { ReactComponent } from "expo-router/build/testing-library/context-stubs";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import { getLocation } from "../api";
 import { locations } from "@/Mocks/location";
+import AddLocation from "@/app/addLocation";
 
 jest.mock("../api");
 
@@ -82,6 +82,10 @@ describe("Add location screen", () => {
   });
 
   it("should store selected location url", async () => {
+    let storage: MMKV;
+
+    storage = new MMKV();
+
     jest.mock("expo-router", () => ({ back: jest.fn() }));
     renderer();
     const input = screen.getByTestId("location-input");
@@ -97,7 +101,7 @@ describe("Add location screen", () => {
     });
 
     await waitFor(async () => {
-      expect(AsyncStorage.setItem).toHaveBeenCalledWith(
+      expect(storage.set).toHaveBeenCalledWith(
         "LOCATION_KEY",
         "berlin-usulutan-el-salvador",
       );
