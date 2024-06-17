@@ -2,7 +2,7 @@ import { getLocation } from "@/api";
 import Input from "@/components/Input";
 import { LocationItem } from "@/components/LocationItem";
 import { QUERY_KEYS } from "@/constants/queries";
-import { STORAGE_KEYS, storeData } from "@/libs/localStorage";
+import { storeData } from "@/libs/localStorage";
 import { useQuery } from "@tanstack/react-query";
 import { Stack, router } from "expo-router";
 import debounce from "lodash/debounce";
@@ -30,7 +30,7 @@ export default function AddLocation() {
 
   const selectCity = async (locationUrl: string) => {
     try {
-      storeData(STORAGE_KEYS.SELECTED_CITY_KEY, locationUrl);
+      storeData("SELECTED_LOCATION_KEY", locationUrl);
       if (router.canGoBack()) {
         router.back();
       } else {

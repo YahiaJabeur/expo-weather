@@ -1,10 +1,8 @@
 import { MMKV } from "react-native-mmkv";
 
-export enum STORAGE_KEYS {
-  SELECTED_CITY_KEY = "LOCATION_KEY",
-}
+export type STORAGE_KEYS = "SELECTED_LOCATION_KEY";
 
-export const storage = new MMKV();
+const storage = new MMKV();
 
 export const storeData = (key: STORAGE_KEYS, value: string) => {
   return storage.set(key, value);

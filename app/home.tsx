@@ -2,7 +2,7 @@ import { getForecast } from "@/api";
 import { DevButton } from "@/components/DevButton";
 import { ForecastItem } from "@/components/ForecastItem";
 import { QUERY_KEYS } from "@/constants/queries";
-import { STORAGE_KEYS, getStoredData } from "@/libs/localStorage";
+import { getStoredData } from "@/libs/localStorage";
 import { getNextMeasurements } from "@/utils/getNextMeasurements";
 import { Feather } from "@expo/vector-icons";
 import { useQuery } from "@tanstack/react-query";
@@ -25,7 +25,7 @@ export default function Home() {
 
   const checkStoreLocation = async () => {
     try {
-      const storedCity = getStoredData(STORAGE_KEYS.SELECTED_CITY_KEY);
+      const storedCity = getStoredData("SELECTED_LOCATION_KEY");
 
       if (storedCity) {
         setLocation(storedCity);
