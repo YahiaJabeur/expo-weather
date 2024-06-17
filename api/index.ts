@@ -15,20 +15,20 @@ api.interceptors.request.use((config) => {
   return config;
 });
 
-export const getLocation = async (location: string): Promise<City[]> => {
-  const { data } = await api.get(`/search.json?q=${location}`);
+export const getLocation = async (location: string) => {
+  const { data } = await api.get<City[]>(`/search.json?q=${location}`);
   return data;
 };
 
-export const getCurrentWeather = async (
-  locationUrl: string,
-): Promise<CurrentWeather> => {
-  const { data } = await api.get(`/current.json?q=${locationUrl}&aqi=no`);
+export const getCurrentWeather = async (locationUrl: string) => {
+  const { data } = await api.get<CurrentWeather>(
+    `/current.json?q=${locationUrl}&aqi=no`,
+  );
   return data;
 };
 
-export const getForecast = async (locationUrl: string): Promise<Forecast> => {
-  const { data } = await api.get(
+export const getForecast = async (locationUrl: string) => {
+  const { data } = await api.get<Forecast>(
     `/forecast.json?q=${locationUrl}&days=2&aqi=no&alerts=no`,
   );
   return data;
