@@ -1,6 +1,7 @@
-import { getStoredData } from "@/libs/localStorage";
 import { Redirect, Stack } from "expo-router";
 import React, { useState } from "react";
+
+import { getStoredData } from "@/libs/localStorage";
 
 export default function App() {
   const [location] = useState(getStoredData("SELECTED_LOCATION_KEY"));

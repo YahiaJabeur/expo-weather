@@ -1,12 +1,4 @@
-import React from "react";
-
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { MMKV } from "react-native-mmkv";
-
-import Home from "@/src/app/index";
-
-import { locations } from "@/src/Mocks/location";
-import AddLocation from "@/src/app/addLocation";
 import { ReactComponent } from "expo-router/build/testing-library/context-stubs";
 import {
   fireEvent,
@@ -14,6 +6,13 @@ import {
   screen,
   waitFor,
 } from "expo-router/testing-library";
+import React from "react";
+import { MMKV } from "react-native-mmkv";
+
+import AddLocation from "@/app/addLocation";
+import Home from "@/app/index";
+import { locations } from "@/Mocks/location";
+
 import { getLocation } from "../api";
 
 jest.mock("../api");

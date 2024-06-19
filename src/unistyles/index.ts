@@ -1,5 +1,6 @@
 import { UnistylesRegistry } from "react-native-unistyles";
-import { lightTheme, darkTheme } from "./themes";
+
+import { darkTheme, lightTheme } from "./themes";
 
 type AppThemes = {
   light: typeof lightTheme;

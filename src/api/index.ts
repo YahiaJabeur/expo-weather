@@ -1,7 +1,8 @@
+import axios from "axios";
+
 import { API_KEY, BASE_URL } from "@/constants/config";
 import { City } from "@/types/City";
 import { CurrentWeather, Forecast } from "@/types/CurrentWeather";
-import axios from "axios";
 
 const api = axios.create({
   baseURL: BASE_URL,

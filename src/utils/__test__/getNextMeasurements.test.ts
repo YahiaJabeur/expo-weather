@@ -1,4 +1,5 @@
-import { measurements } from "@/src/Mocks/measurements";
+import { measurements } from "@/Mocks/measurements";
+
 import { getNextMeasurements } from "../getNextMeasurements";
 
 describe("getNextMeasurements", () => {

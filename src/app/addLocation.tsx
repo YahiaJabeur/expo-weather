@@ -1,14 +1,15 @@
+import { useQuery } from "@tanstack/react-query";
+import { router, Stack } from "expo-router";
+import debounce from "lodash/debounce";
+import React, { useCallback, useState } from "react";
+import { FlatList, View } from "react-native";
+import { createStyleSheet, useStyles } from "react-native-unistyles";
+
 import { getLocation } from "@/api";
 import Input from "@/components/Input";
 import { LocationItem } from "@/components/LocationItem";
 import { QUERY_KEYS } from "@/constants/queries";
 import { storeData } from "@/libs/localStorage";
-import { useQuery } from "@tanstack/react-query";
-import { Stack, router } from "expo-router";
-import debounce from "lodash/debounce";
-import React, { useCallback, useState } from "react";
-import { FlatList, View } from "react-native";
-import { createStyleSheet, useStyles } from "react-native-unistyles";
 
 export default function AddLocation() {
   const [location, setLocation] = useState<string>("");

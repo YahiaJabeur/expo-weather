@@ -1,16 +1,14 @@
-import React from "react";
-
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-
-import Home from "@/src/app/index";
-
-import { forecast } from "@/src/Mocks/forecast";
-import AddLocation from "@/src/app/addLocation";
-import app from "@/src/app/index";
-import { storeData } from "@/src/libs/localStorage";
 import { ReactComponent } from "expo-router/build/testing-library/context-stubs";
 import { renderRouter, screen, waitFor } from "expo-router/testing-library";
-import { getForecast } from "../src/api";
+import React from "react";
+
+import { getForecast } from "@/api";
+import AddLocation from "@/app/addLocation";
+import Home from "@/app/index";
+import app from "@/app/index";
+import { storeData } from "@/libs/localStorage";
+import { forecast } from "@/Mocks/forecast";
 
 jest.mock("../api");
 
@@ -34,7 +32,7 @@ const renderer = () =>
     },
     {
       initialUrl: "/",
-    }
+    },
   );
 
 describe("Home screen", () => {
@@ -57,7 +55,7 @@ describe("Home screen", () => {
 
   describe("when location is already selected and stored", () => {
     test("should start application in Home screen", async () => {
-      storeData(STORAGE_KEYS.SELECTED_CITY_KEY, "Berlin");
+      storeData("SELECTED_LOCATION_KEY", "Berlin");
 
       renderer();
 
@@ -75,7 +73,7 @@ describe("Home screen", () => {
     });
 
     test("should display 5 next days weather", async () => {
-      storeData(STORAGE_KEYS.SELECTED_CITY_KEY, "Berlin");
+      storeData("SELECTED_LOCATION_KEY", "Berlin");
 
       // @ts-ignore
       getForecast.mockResolvedValueOnce(forecast);
@@ -103,13 +101,13 @@ describe("Home screen", () => {
       await waitFor(async () => {
         // @ts-ignore
         expect(screen.getByTestId("location-name")).toHaveTextContent(
-          "Tunis, Tunisia"
+          "Tunis, Tunisia",
         );
       });
       await waitFor(async () => {
         // @ts-ignore
         expect(screen.getByTestId("feels-like")).toHaveTextContent(
-          "Feels like 21 °C"
+          "Feels like 21 °C",
         );
       });
       await waitFor(async () => {

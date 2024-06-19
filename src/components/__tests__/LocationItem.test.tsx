@@ -1,6 +1,8 @@
-import { location } from "@/src/Mocks/location";
 import React from "react";
 import renderer from "react-test-renderer";
+
+import { location } from "@/Mocks/location";
+
 import { LocationItem } from "../LocationItem";
 
 const mockOnPress = jest.fn();

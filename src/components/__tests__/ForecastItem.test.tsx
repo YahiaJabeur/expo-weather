@@ -1,6 +1,8 @@
-import { measurements } from "@/src/Mocks/measurements";
 import React from "react";
 import renderer from "react-test-renderer";
+
+import { measurements } from "@/Mocks/measurements";
+
 import { ForecastItem } from "../ForecastItem";
 
 test("renders correctly", () => {

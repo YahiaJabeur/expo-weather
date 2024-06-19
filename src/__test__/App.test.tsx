@@ -1,14 +1,12 @@
-import React from "react";
-
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-
-import Home from "@/src/app/index";
-
-import AddLocation from "@/src/app/addLocation";
-import app from "@/src/app/index";
-import { storeData } from "@/src/libs/localStorage";
 import { ReactComponent } from "expo-router/build/testing-library/context-stubs";
 import { renderRouter, screen } from "expo-router/testing-library";
+import React from "react";
+
+import AddLocation from "@/app/addLocation";
+import Home from "@/app/index";
+import app from "@/app/index";
+import { storeData } from "@/libs/localStorage";
 
 jest.mock("../api");
 
@@ -32,7 +30,7 @@ const renderer = () =>
     },
     {
       initialUrl: "/",
-    }
+    },
   );
 
 describe("App", () => {
@@ -55,7 +53,7 @@ describe("App", () => {
 
   describe("when location is already selected and stored", () => {
     test("should start application in Home screen", async () => {
-      storeData(STORAGE_KEYS.SELECTED_CITY_KEY, "Berlin");
+      storeData("SELECTED_LOCATION_KEY", "Berlin");
 
       renderer();
 

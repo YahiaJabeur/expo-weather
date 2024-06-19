@@ -1,5 +1,6 @@
-import { clearStorage } from "@/libs/localStorage";
 import { Button } from "react-native";
+
+import { clearStorage } from "@/libs/localStorage";
 
 export const DevButton = () => {
   return (
