@@ -1,4 +1,4 @@
-rootProject.name = 'expo-weather'
+rootProject.name = 'Expo Weather'
 
 dependencyResolutionManagement {
   versionCatalogs {

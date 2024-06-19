@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "expo-weather",
-    "slug": "expo-weather",
+    "name": "Expo Weather",
+    "slug": "Expo Weather",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",

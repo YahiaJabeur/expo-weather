@@ -27,6 +27,7 @@
         <data android:scheme="myapp"/>
         <data android:scheme="com.djabeur.expoweather"/>
         <data android:scheme="exp+expo-weather"/>
+        <data android:scheme="exp+expoweather"/>
       </intent-filter>
     </activity>
     <activity android:name="com.facebook.react.devsupport.DevSettingsActivity" android:exported="false"/>
