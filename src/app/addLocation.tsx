@@ -1,8 +1,8 @@
-import { getLocation } from "@/src/api";
-import Input from "@/src/components/Input";
-import { LocationItem } from "@/src/components/LocationItem";
-import { QUERY_KEYS } from "@/src/constants/queries";
-import { storeData } from "@/src/libs/localStorage";
+import { getLocation } from "@/api";
+import Input from "@/components/Input";
+import { LocationItem } from "@/components/LocationItem";
+import { QUERY_KEYS } from "@/constants/queries";
+import { storeData } from "@/libs/localStorage";
 import { useQuery } from "@tanstack/react-query";
 import { Stack, router } from "expo-router";
 import debounce from "lodash/debounce";

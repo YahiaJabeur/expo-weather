@@ -1,6 +1,6 @@
-import { API_KEY, BASE_URL } from "@/src/constants/config";
-import { City } from "@/src/types/City";
-import { CurrentWeather, Forecast } from "@/src/types/CurrentWeather";
+import { API_KEY, BASE_URL } from "@/constants/config";
+import { City } from "@/types/City";
+import { CurrentWeather, Forecast } from "@/types/CurrentWeather";
 import axios from "axios";
 
 const api = axios.create({

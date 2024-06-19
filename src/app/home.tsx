@@ -1,9 +1,9 @@
-import { getForecast } from "@/src/api";
-import { DevButton } from "@/src/components/DevButton";
-import { ForecastItem } from "@/src/components/ForecastItem";
-import { QUERY_KEYS } from "@/src/constants/queries";
-import { getStoredData } from "@/src/libs/localStorage";
-import { getNextMeasurements } from "@/src/utils/getNextMeasurements";
+import { getForecast } from "@/api";
+import { DevButton } from "@/components/DevButton";
+import { ForecastItem } from "@/components/ForecastItem";
+import { QUERY_KEYS } from "@/constants/queries";
+import { getStoredData } from "@/libs/localStorage";
+import { getNextMeasurements } from "@/utils/getNextMeasurements";
 import { Feather } from "@expo/vector-icons";
 import { useQuery } from "@tanstack/react-query";
 import { Link, Stack, useFocusEffect } from "expo-router";

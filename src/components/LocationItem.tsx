@@ -1,4 +1,4 @@
-import { City } from "@/src/types/City";
+import { City } from "@/types/City";
 import React from "react";
 import { Text, TouchableOpacity, View } from "react-native";
 import { createStyleSheet, useStyles } from "react-native-unistyles";
