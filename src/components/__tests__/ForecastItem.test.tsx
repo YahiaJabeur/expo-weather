@@ -1,7 +1,7 @@
+import { measurements } from "@/src/Mocks/measurements";
 import React from "react";
 import renderer from "react-test-renderer";
 import { ForecastItem } from "../ForecastItem";
-import { measurements } from "@/Mocks/measurements";
 
 test("renders correctly", () => {
   const tree = renderer

@@ -3,18 +3,18 @@ import React from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { MMKV } from "react-native-mmkv";
 
-import Home from "@/app/index";
+import Home from "@/src/app/index";
 
+import { locations } from "@/src/Mocks/location";
+import AddLocation from "@/src/app/addLocation";
+import { ReactComponent } from "expo-router/build/testing-library/context-stubs";
 import {
   fireEvent,
   renderRouter,
   screen,
   waitFor,
 } from "expo-router/testing-library";
-import { ReactComponent } from "expo-router/build/testing-library/context-stubs";
 import { getLocation } from "../api";
-import { locations } from "@/Mocks/location";
-import AddLocation from "@/app/addLocation";
 
 jest.mock("../api");
 

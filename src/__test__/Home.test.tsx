@@ -2,15 +2,15 @@ import React from "react";
 
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
-import Home from "@/app/index";
+import Home from "@/src/app/index";
 
-import { renderRouter, screen, waitFor } from "expo-router/testing-library";
+import { forecast } from "@/src/Mocks/forecast";
+import AddLocation from "@/src/app/addLocation";
+import app from "@/src/app/index";
+import { storeData } from "@/src/libs/localStorage";
 import { ReactComponent } from "expo-router/build/testing-library/context-stubs";
-import { getForecast } from "../api";
-import { forecast } from "@/Mocks/forecast";
-import { STORAGE_KEYS, storeData } from "@/libs/localStorage";
-import AddLocation from "@/app/addLocation";
-import app from "@/app/index";
+import { renderRouter, screen, waitFor } from "expo-router/testing-library";
+import { getForecast } from "../src/api";
 
 jest.mock("../api");
 
@@ -34,7 +34,7 @@ const renderer = () =>
     },
     {
       initialUrl: "/",
-    },
+    }
   );
 
 describe("Home screen", () => {
@@ -103,13 +103,13 @@ describe("Home screen", () => {
       await waitFor(async () => {
         // @ts-ignore
         expect(screen.getByTestId("location-name")).toHaveTextContent(
-          "Tunis, Tunisia",
+          "Tunis, Tunisia"
         );
       });
       await waitFor(async () => {
         // @ts-ignore
         expect(screen.getByTestId("feels-like")).toHaveTextContent(
-          "Feels like 21 °C",
+          "Feels like 21 °C"
         );
       });
       await waitFor(async () => {

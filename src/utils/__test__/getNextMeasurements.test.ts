@@ -1,5 +1,5 @@
+import { measurements } from "@/src/Mocks/measurements";
 import { getNextMeasurements } from "../getNextMeasurements";
-import { measurements } from "@/Mocks/measurements";
 
 describe("getNextMeasurements", () => {
   afterAll(() => {

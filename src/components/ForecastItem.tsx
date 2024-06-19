@@ -1,6 +1,6 @@
-import { Measurements } from "@/types/CurrentWeather";
+import { Measurements } from "@/src/types/CurrentWeather";
 import React from "react";
-import { Text, View, Image } from "react-native";
+import { Image, Text, View } from "react-native";
 import { createStyleSheet, useStyles } from "react-native-unistyles";
 
 interface Props {

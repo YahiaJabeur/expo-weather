@@ -1,4 +1,4 @@
-import { Measurements } from "@/types/CurrentWeather";
+import { Measurements } from "@/src/types/CurrentWeather";
 
 export function getNextMeasurements(data: Measurements[]) {
   const currentTime = new Date();

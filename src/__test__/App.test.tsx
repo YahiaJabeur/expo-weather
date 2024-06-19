@@ -2,11 +2,11 @@ import React from "react";
 
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
-import Home from "@/app/index";
+import Home from "@/src/app/index";
 
-import AddLocation from "@/app/addLocation";
-import app from "@/app/index";
-import { STORAGE_KEYS, storeData } from "@/libs/localStorage";
+import AddLocation from "@/src/app/addLocation";
+import app from "@/src/app/index";
+import { storeData } from "@/src/libs/localStorage";
 import { ReactComponent } from "expo-router/build/testing-library/context-stubs";
 import { renderRouter, screen } from "expo-router/testing-library";
 
@@ -32,7 +32,7 @@ const renderer = () =>
     },
     {
       initialUrl: "/",
-    },
+    }
   );
 
 describe("App", () => {

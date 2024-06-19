@@ -1,7 +1,7 @@
+import { City } from "@/src/types/City";
 import React from "react";
 import { Text, TouchableOpacity, View } from "react-native";
 import { createStyleSheet, useStyles } from "react-native-unistyles";
-import { City } from "@/types/City";
 
 interface Props {
   item: City;
