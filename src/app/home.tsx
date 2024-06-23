@@ -13,8 +13,6 @@ import { getStoredData } from "@/libs/localStorage";
 import { getNextMeasurements } from "@/utils/getNextMeasurements";
 
 export default function Home() {
-  console.log("home render");
-
   const { styles, theme } = useStyles(stylesheet);
   const [location, setLocation] = useState<string>("");
 
