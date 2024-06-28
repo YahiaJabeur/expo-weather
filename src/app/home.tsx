@@ -42,7 +42,6 @@ export default function Home() {
 
   const memoizedMeasurements = useMemo(() => {
     if (data) {
-      // TODO
       const measurement = [
         ...data.forecast.forecastday[0].hour,
         ...data.forecast.forecastday[1].hour,
