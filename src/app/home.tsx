@@ -129,6 +129,7 @@ const stylesheet = createStyleSheet((theme) => ({
     marginTop: theme.margins.lg,
     fontWeight: "bold",
     fontSize: theme.typography.lg,
+    color: theme.colors.typography,
   },
   temp: {
     fontSize: theme.typography["7xl"],
