@@ -63,7 +63,6 @@ export default function AddLocation() {
         renderItem={({ item, index }) => (
           <LocationItem
             testID={`location-item-${index}`}
-            // key={item.id}
             item={item}
             onPress={selectCity}
           />
