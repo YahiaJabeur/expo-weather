@@ -107,7 +107,7 @@ export default function Home() {
           )}
         </>
       )}
-      <DevButton />
+      {/* {__DEV__ && <DevButton />} */}
     </ScrollView>
   );
 }
