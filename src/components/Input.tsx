@@ -1,12 +1,16 @@
-import React from "react";
+import React, { forwardRef } from "react";
 import { TextInput, TextInputProps } from "react-native";
 import { createStyleSheet, useStyles } from "react-native-unistyles";
 
-const Input = ({ style, ...props }: TextInputProps) => {
-  const { styles } = useStyles(stylesheet);
+const Input = forwardRef<TextInput, TextInputProps>(
+  ({ style, ...props }, ref) => {
+    const { styles } = useStyles(stylesheet);
 
-  return <TextInput style={[styles.input, style]} {...props} />;
-};
+    return <TextInput ref={ref} style={[styles.input, style]} {...props} />;
+  },
+);
+
+Input.displayName = "Input";
 
 const stylesheet = createStyleSheet((theme) => ({
   input: {

@@ -1,8 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
 import { router, Stack } from "expo-router";
 import debounce from "lodash/debounce";
-import React, { useCallback, useState } from "react";
-import { FlatList, View } from "react-native";
+import React, { useCallback, useEffect, useRef, useState } from "react";
+import { FlatList, Keyboard, TextInput, View } from "react-native";
 import { createStyleSheet, useStyles } from "react-native-unistyles";
 
 import { getLocation } from "@/api";
@@ -14,6 +14,7 @@ import { storeData } from "@/libs/localStorage";
 export default function AddLocation() {
   const [location, setLocation] = useState<string>("");
   const { styles, theme } = useStyles(stylesheet);
+  const inputRef = useRef<TextInput>(null);
 
   const { data } = useQuery({
     enabled: !!location,
@@ -42,6 +43,22 @@ export default function AddLocation() {
     }
   };
 
+  useEffect(() => {
+    const focusTimeout = setTimeout(() => {
+      if (inputRef.current) {
+        inputRef.current.focus();
+        Keyboard.dismiss();
+        setTimeout(() => {
+          if (inputRef.current) {
+            inputRef.current.focus();
+          }
+        }, 100);
+      }
+    }, 100);
+
+    return () => clearTimeout(focusTimeout);
+  }, []);
+
   return (
     <View testID="add-location-screen" style={styles.container}>
       <Stack.Screen
@@ -53,6 +70,7 @@ export default function AddLocation() {
       />
       <Input
         testID="location-input"
+        ref={inputRef}
         style={styles.input}
         placeholder="Enter location"
         onChangeText={debouncedSetLocation}
