@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-               BuildableName = "expoweather.app"
-               BlueprintName = "expoweather"
-               ReferencedContainer = "container:expoweather.xcodeproj">
+               BuildableName = "ExpoWeather.app"
+               BlueprintName = "ExpoWeather"
+               ReferencedContainer = "container:ExpoWeather.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "00E356ED1AD99517003FC87E"
-               BuildableName = "expoweatherTests.xctest"
-               BlueprintName = "expoweatherTests"
-               ReferencedContainer = "container:expoweather.xcodeproj">
+               BuildableName = "ExpoWeatherTests.xctest"
+               BlueprintName = "ExpoWeatherTests"
+               ReferencedContainer = "container:ExpoWeather.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -55,9 +55,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "expoweather.app"
-            BlueprintName = "expoweather"
-            ReferencedContainer = "container:expoweather.xcodeproj">
+            BuildableName = "ExpoWeather.app"
+            BlueprintName = "ExpoWeather"
+            ReferencedContainer = "container:ExpoWeather.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -72,9 +72,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "expoweather.app"
-            BlueprintName = "expoweather"
-            ReferencedContainer = "container:expoweather.xcodeproj">
+            BuildableName = "ExpoWeather.app"
+            BlueprintName = "ExpoWeather"
+            ReferencedContainer = "container:ExpoWeather.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

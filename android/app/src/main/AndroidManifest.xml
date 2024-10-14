@@ -26,7 +26,6 @@
         <category android:name="android.intent.category.BROWSABLE"/>
         <data android:scheme="myapp"/>
         <data android:scheme="com.djabeur.expoweather"/>
-        <data android:scheme="exp+expo-weather"/>
         <data android:scheme="exp+expoweather"/>
       </intent-filter>
     </activity>
