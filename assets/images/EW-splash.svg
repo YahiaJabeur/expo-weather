@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1284 2778" width="1284" height="2778">
+    <rect width="1284" height="2778" fill="#4a90e2" />
+    <path d="M 772 1303.27 C 772 1203.196 663.667 1140.65 577 1190.687 C 536.778 1213.909 512 1256.825 512 1303.27"
+        fill="#FFD700" />
+    <g stroke="#FFD700" stroke-width="10" transform="matrix(1, 0, 0, 1, 130, 853.269958)">
+        <line x1="512" y1="242" x2="512" y2="312" />
+        <line x1="292" y1="445" x2="362" y2="445" />
+        <line x1="662" y1="445" x2="732" y2="445" />
+        <line x1="353" y1="308" x2="403" y2="358" />
+        <line x1="621" y1="358" x2="671" y2="308" />
+    </g><text x="642" y="1583.27" font-family="Georgia Bold" font-size="400" fill="#FFD700" text-anchor="middle"
+        font-weight="bold" style="white-space: pre; font-size: 400px;">EW</text>
+</svg>
