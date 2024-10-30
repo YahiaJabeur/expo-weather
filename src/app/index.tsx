@@ -18,9 +18,9 @@ export default function App() {
       />
       <ActivityIndicator size={"large"} />
       {location ? (
-        <Redirect href={"home"} />
+        <Redirect href={"/home"} />
       ) : (
-        <Redirect href={"addLocation"} />
+        <Redirect href={"/addLocation"} />
       )}
     </View>
   );

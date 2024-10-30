@@ -36,7 +36,7 @@ export default function AddLocation() {
       if (router.canGoBack()) {
         router.back();
       } else {
-        router.replace("home");
+        router.replace("/home");
       }
     } catch (error) {
       console.error("Failed to store selected city:", error);

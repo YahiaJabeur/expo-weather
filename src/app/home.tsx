@@ -47,7 +47,7 @@ export default function Home() {
         ...data.forecast.forecastday[1].hour,
       ];
       return getNextMeasurements(measurement);
-    } else return undefined;
+    }
   }, [data]);
 
   return (
@@ -107,7 +107,7 @@ export default function Home() {
           )}
         </>
       )}
-      {/* {__DEV__ && <DevButton />} */}
+      {__DEV__ && <DevButton />}
     </ScrollView>
   );
 }
