@@ -1,26 +1,62 @@
 import { useQuery } from "@tanstack/react-query";
+import * as Location from "expo-location";
 import { router, Stack } from "expo-router";
 import debounce from "lodash/debounce";
 import React, { useCallback, useEffect, useRef, useState } from "react";
-import { FlatList, Keyboard, TextInput, View } from "react-native";
+import {
+  Alert,
+  FlatList,
+  Keyboard,
+  Linking,
+  TextInput,
+  View,
+} from "react-native";
 import { createStyleSheet, useStyles } from "react-native-unistyles";
 
-import { getLocation } from "@/api";
+import { Geolocation, getLocationByGeo } from "@/api";
+import Button from "@/components/Button";
 import Input from "@/components/Input";
 import { LocationItem } from "@/components/LocationItem";
 import { QUERY_KEYS } from "@/constants/queries";
 import { storeData } from "@/libs/localStorage";
 
 export default function AddLocation() {
-  const [location, setLocation] = useState<string>("");
+  const [location, setLocation] = useState<Geolocation | string>();
   const { styles, theme } = useStyles(stylesheet);
   const inputRef = useRef<TextInput>(null);
 
   const { data } = useQuery({
     enabled: !!location,
     queryKey: [QUERY_KEYS.GET_LOCATION, location],
-    queryFn: () => getLocation(location),
+    queryFn: () => getLocationByGeo(location as Geolocation | string),
   });
+
+  const openSettings = () => {
+    Linking.openSettings();
+  };
+
+  const getLonLat = async () => {
+    let { status } = await Location.requestForegroundPermissionsAsync();
+    console.log("status", status);
+
+    if (status !== "granted") {
+      Alert.alert(
+        "Location Permission Required",
+        "Please enable location permissions in settings to use this feature",
+        [
+          { text: "Cancel", style: "cancel" },
+          { text: "Open Settings", onPress: openSettings },
+        ],
+      );
+      return;
+    }
+
+    let location = await Location.getCurrentPositionAsync({});
+    setLocation({
+      lat: location.coords.latitude,
+      lon: location.coords.longitude,
+    });
+  };
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const debouncedSetLocation = useCallback(
@@ -68,13 +104,21 @@ export default function AddLocation() {
           headerShadowVisible: false,
         }}
       />
-      <Input
-        testID="location-input"
-        ref={inputRef}
-        style={styles.input}
-        placeholder="Enter location"
-        onChangeText={debouncedSetLocation}
-      />
+      <View style={styles.inputContainer}>
+        <Input
+          testID="location-input"
+          ref={inputRef}
+          style={styles.input}
+          placeholder="Enter location"
+          onChangeText={debouncedSetLocation}
+        />
+        <Button
+          onPress={getLonLat}
+          variant="outline"
+          iconName="my-location"
+          style={styles.locationButton}
+        />
+      </View>
       <FlatList
         data={data}
         keyExtractor={(item) => item.id.toString()}
@@ -96,8 +140,21 @@ const stylesheet = createStyleSheet((theme) => ({
     flex: 1,
     backgroundColor: theme.colors.background,
   },
+  inputContainer: {
+    flexDirection: "row",
+    paddingHorizontal: theme.paddings.lg,
+    width: "100%",
+  },
   input: {
     marginHorizontal: theme.margins.lg,
+    flex: 1,
+    marginRight: theme.margins.lg,
     color: theme.colors.typography,
+  },
+  locationButton: {
+    width: 48,
+    height: 48,
+    padding: 0,
+    aspectRatio: 1,
   },
 }));
