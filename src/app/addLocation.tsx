@@ -38,7 +38,6 @@ export default function AddLocation() {
 
   const getLonLat = async () => {
     let { status } = await Location.requestForegroundPermissionsAsync();
-    console.log("status", status);
 
     if (status !== "granted") {
       Alert.alert(
