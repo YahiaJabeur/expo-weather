@@ -1,8 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
+import { useDebounce } from "@uidotdev/usehooks";
 import * as Location from "expo-location";
 import { router, Stack } from "expo-router";
-import debounce from "lodash/debounce";
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
   Alert,
   FlatList,
@@ -24,11 +24,12 @@ export default function AddLocation() {
   const [location, setLocation] = useState<Geolocation | string>();
   const { styles, theme } = useStyles(stylesheet);
   const inputRef = useRef<TextInput>(null);
+  const debouncedLocation = useDebounce(location, 500);
 
   const { data } = useQuery({
-    enabled: !!location,
-    queryKey: [QUERY_KEYS.GET_LOCATION, location],
-    queryFn: () => getLocationByGeo(location as Geolocation | string),
+    enabled: !!debouncedLocation,
+    queryKey: [QUERY_KEYS.GET_LOCATION, debouncedLocation],
+    queryFn: () => getLocationByGeo(debouncedLocation as Geolocation | string),
   });
 
   const openSettings = () => {
@@ -57,14 +58,6 @@ export default function AddLocation() {
       lon: location.coords.longitude,
     });
   };
-
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  const debouncedSetLocation = useCallback(
-    debounce((text: string) => {
-      setLocation(text);
-    }, 500),
-    [],
-  );
 
   const selectCity = async (locationUrl: string) => {
     try {
@@ -110,7 +103,7 @@ export default function AddLocation() {
           ref={inputRef}
           style={styles.input}
           placeholder="Enter location"
-          onChangeText={debouncedSetLocation}
+          onChangeText={setLocation}
         />
         <Button
           onPress={getLonLat}
@@ -121,6 +114,7 @@ export default function AddLocation() {
       </View>
       <FlatList
         data={data}
+        initialNumToRender={10}
         keyExtractor={(item) => item.id.toString()}
         renderItem={({ item, index }) => (
           <LocationItem
