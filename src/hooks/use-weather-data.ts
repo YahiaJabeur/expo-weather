@@ -1,13 +1,21 @@
-import { useQuery } from "@tanstack/react-query";
+import { QueryObserverResult, useQuery } from "@tanstack/react-query";
 import { useFocusEffect } from "expo-router";
 import { useCallback, useMemo, useState } from "react";
 
 import { getForecast } from "@/api";
 import { QUERY_KEYS } from "@/constants/queries";
 import { getStoredData } from "@/libs/localStorage";
+import { Forecast, Measurements } from "@/types/CurrentWeather";
 import { getNextMeasurements } from "@/utils/getNextMeasurements";
 
-export const useWeatherData = () => {
+interface UseWeatherDataReturn {
+  data: Forecast | undefined;
+  isLoading: boolean;
+  refetch: () => Promise<QueryObserverResult<Forecast, Error>>;
+  nextDaysMeasurements: Measurements[] | undefined;
+}
+
+export const useWeatherData = (): UseWeatherDataReturn => {
   const [location, setLocation] = useState<string>("");
 
   const { data, isLoading, refetch } = useQuery({
@@ -18,7 +26,7 @@ export const useWeatherData = () => {
     staleTime: 5 * 60 * 1000,
   });
 
-  const checkStoreLocation = () => {
+  const checkStoreLocation = useCallback(() => {
     try {
       const storedCity = getStoredData("SELECTED_LOCATION_KEY");
 
@@ -28,13 +36,11 @@ export const useWeatherData = () => {
     } catch (error) {
       console.error("Failed to load selected city:", error);
     }
-  };
+  }, []);
 
-  useFocusEffect(
-    useCallback(() => {
-      checkStoreLocation();
-    }, []),
-  );
+  useFocusEffect(() => {
+    checkStoreLocation();
+  });
 
   const nextDaysMeasurements = useMemo(() => {
     if (!data?.forecast?.forecastday) return undefined;
