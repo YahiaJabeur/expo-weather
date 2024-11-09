@@ -1,54 +1,16 @@
 import { Feather } from "@expo/vector-icons";
-import { useQuery } from "@tanstack/react-query";
-import { Link, Stack, useFocusEffect } from "expo-router";
-import React, { useCallback, useMemo, useState } from "react";
+import { Link, Stack } from "expo-router";
+import React from "react";
 import { Image, RefreshControl, ScrollView, Text, View } from "react-native";
 import { createStyleSheet, useStyles } from "react-native-unistyles";
 
-import { getForecast } from "@/api";
 import { DevButton } from "@/components/DevButton";
 import { ForecastItem } from "@/components/ForecastItem";
-import { QUERY_KEYS } from "@/constants/queries";
-import { getStoredData } from "@/libs/localStorage";
-import { getNextMeasurements } from "@/utils/getNextMeasurements";
+import { useWeatherData } from "@/hooks/use-weather-data";
 
 export default function Home() {
   const { styles, theme } = useStyles(stylesheet);
-  const [location, setLocation] = useState<string>("");
-
-  const { data, isLoading, refetch } = useQuery({
-    enabled: !!location,
-    queryKey: [QUERY_KEYS.GET_FORECAST, location],
-    queryFn: () => getForecast(location),
-  });
-
-  const checkStoreLocation = async () => {
-    try {
-      const storedCity = getStoredData("SELECTED_LOCATION_KEY");
-
-      if (storedCity) {
-        setLocation(storedCity);
-      }
-    } catch (error) {
-      console.error("Failed to load selected city:", error);
-    }
-  };
-
-  useFocusEffect(
-    useCallback(() => {
-      checkStoreLocation();
-    }, []),
-  );
-
-  const memoizedMeasurements = useMemo(() => {
-    if (data) {
-      const measurement = [
-        ...data.forecast.forecastday[0].hour,
-        ...data.forecast.forecastday[1].hour,
-      ];
-      return getNextMeasurements(measurement);
-    }
-  }, [data]);
+  const { data, refetch, nextDaysMeasurements, isLoading } = useWeatherData();
 
   return (
     <ScrollView
@@ -92,9 +54,9 @@ export default function Home() {
             testID="feels-like"
             style={styles.feelsLike}
           >{`Feels like ${data.current.feelslike_c} °C`}</Text>
-          {memoizedMeasurements && (
+          {nextDaysMeasurements && (
             <View style={styles.forecastWrapper}>
-              {memoizedMeasurements.map((measurement, index) => {
+              {nextDaysMeasurements.map((measurement, index) => {
                 return (
                   <ForecastItem
                     testID={`forecast-${index}`}
