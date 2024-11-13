@@ -1,10 +1,10 @@
 import { QueryObserverResult, useQuery } from "@tanstack/react-query";
 import { useFocusEffect } from "expo-router";
-import { useCallback, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 
 import { getForecast } from "@/api";
 import { QUERY_KEYS } from "@/constants/queries";
-import { getStoredData } from "@/libs/localStorage";
+import { getStoredData, storeData } from "@/libs/localStorage";
 import { Forecast, Measurements } from "@/types/CurrentWeather";
 import { getNextMeasurements } from "@/utils/getNextMeasurements";
 
@@ -18,13 +18,33 @@ interface UseWeatherDataReturn {
 export const useWeatherData = (): UseWeatherDataReturn => {
   const [location, setLocation] = useState<string>("");
 
-  const { data, isLoading, refetch } = useQuery({
+  const {
+    data: fetchedForecastData,
+    isLoading,
+    refetch,
+  } = useQuery({
     enabled: !!location,
     queryKey: [QUERY_KEYS.GET_FORECAST, location],
     queryFn: () => getForecast(location),
     retry: 2,
     staleTime: 5 * 60 * 1000,
   });
+
+  useEffect(() => {
+    if (fetchedForecastData) {
+      storeData("FORECAST_DATA", JSON.stringify(fetchedForecastData));
+    }
+  }, [fetchedForecastData]);
+
+  const forecastData = useMemo(() => {
+    if (fetchedForecastData) return fetchedForecastData;
+
+    const storedForecastData = getStoredData("FORECAST_DATA");
+    const data = storedForecastData
+      ? (JSON.parse(storedForecastData) as Forecast)
+      : undefined;
+    return data;
+  }, [fetchedForecastData]);
 
   const checkStoreLocation = useCallback(() => {
     try {
@@ -43,19 +63,24 @@ export const useWeatherData = (): UseWeatherDataReturn => {
   });
 
   const nextDaysMeasurements = useMemo(() => {
-    if (!data?.forecast?.forecastday) return undefined;
+    if (!forecastData?.forecast?.forecastday) return undefined;
 
     try {
-      const measurement = [
-        ...data.forecast.forecastday[0].hour,
-        ...data.forecast.forecastday[1].hour,
+      const measurements = [
+        ...forecastData.forecast.forecastday[0].hour,
+        ...forecastData.forecast.forecastday[1].hour,
       ];
-      return getNextMeasurements(measurement);
+      return getNextMeasurements(measurements);
     } catch (error) {
       console.error("Error processing measurements:", error);
       return undefined;
     }
-  }, [data]);
+  }, [forecastData]);
 
-  return { data, isLoading, refetch, nextDaysMeasurements };
+  return {
+    data: forecastData,
+    isLoading,
+    refetch,
+    nextDaysMeasurements,
+  };
 };

@@ -1,6 +1,6 @@
 import { MMKV } from "react-native-mmkv";
 
-export type STORAGE_KEYS = "SELECTED_LOCATION_KEY";
+export type STORAGE_KEYS = "SELECTED_LOCATION_KEY" | "FORECAST_DATA";
 
 const storage = new MMKV();
 
