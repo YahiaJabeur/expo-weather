@@ -10,7 +10,8 @@ import { useWeatherData } from "@/hooks/use-weather-data";
 
 export default function Home() {
   const { styles, theme } = useStyles(stylesheet);
-  const { data, refetch, nextDaysMeasurements, isLoading } = useWeatherData();
+  const { forecastData, refetch, nextDaysMeasurements, isLoading } =
+    useWeatherData();
 
   return (
     <ScrollView
@@ -25,7 +26,7 @@ export default function Home() {
         options={{
           headerTitleStyle: { color: theme.colors.typography },
           headerStyle: { backgroundColor: theme.colors.background },
-          title: data ? data?.location.name : "",
+          title: forecastData ? forecastData?.location.name : "",
           headerShadowVisible: false,
           headerRight: () => (
             <Link testID="change-location" href="/addLocation">
@@ -34,26 +35,26 @@ export default function Home() {
           ),
         }}
       />
-      {data && (
+      {forecastData && (
         <>
           <Image
-            source={{ uri: `https:${data.current.condition.icon}` }}
+            source={{ uri: `https:${forecastData.current.condition.icon}` }}
             style={styles.icon}
             testID="weather-icon"
           />
           <Text
             style={styles.name}
             testID="location-name"
-          >{`${data.location.name}, ${data.location.country}`}</Text>
+          >{`${forecastData.location.name}, ${forecastData.location.country}`}</Text>
           <View testID="temperature" style={styles.tempContainer}>
-            <Text style={styles.temp}>{`${data.current.temp_c}`}</Text>
+            <Text style={styles.temp}>{`${forecastData.current.temp_c}`}</Text>
             <Text style={styles.unit}>°C</Text>
           </View>
-          <Text>{data.current.condition.text}</Text>
+          <Text>{forecastData.current.condition.text}</Text>
           <Text
             testID="feels-like"
             style={styles.feelsLike}
-          >{`Feels like ${data.current.feelslike_c} °C`}</Text>
+          >{`Feels like ${forecastData.current.feelslike_c} °C`}</Text>
           {nextDaysMeasurements && (
             <View style={styles.forecastWrapper}>
               {nextDaysMeasurements.map((measurement, index) => {
