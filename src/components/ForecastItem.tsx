@@ -25,7 +25,7 @@ export const ForecastItem = ({
         style={styles.icon}
         accessibilityLabel={`Weather condition: ${condition.text}`}
       />
-      <Text style={styles.temp}>{`${temp_c} °C`}</Text>
+      <Text style={styles.temp}>{`${Math.round(temp_c)} °C`}</Text>
       <Text style={styles.time}>{time.substring(11)}</Text>
     </View>
   );

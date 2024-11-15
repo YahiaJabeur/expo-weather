@@ -47,7 +47,9 @@ export default function Home() {
             testID="location-name"
           >{`${forecastData.location.name}, ${forecastData.location.country}`}</Text>
           <View testID="temperature" style={styles.tempContainer}>
-            <Text style={styles.temp}>{`${forecastData.current.temp_c}`}</Text>
+            <Text
+              style={styles.temp}
+            >{`${Math.round(forecastData.current.temp_c)}`}</Text>
             <Text style={styles.unit}>°C</Text>
           </View>
           <Text>{forecastData.current.condition.text}</Text>
