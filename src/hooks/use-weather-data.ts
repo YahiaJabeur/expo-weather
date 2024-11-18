@@ -2,9 +2,9 @@ import { QueryObserverResult } from "@tanstack/react-query";
 
 import { Forecast, Measurements } from "@/types/CurrentWeather";
 
-import { useForecastData } from "./useForecastData";
-import { useLocation } from "./useLocation";
-import { useNextDaysMeasurements } from "./useNextDaysMeasurements";
+import { useForecastData } from "./use-forecast-data";
+import { useLocation } from "./use-location";
+import { useNextDaysMeasurements } from "./use-next-days-measurements";
 
 interface UseWeatherDataReturn {
   forecastData: Forecast | undefined;
