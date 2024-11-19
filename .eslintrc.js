@@ -1,10 +1,11 @@
 module.exports = {
   extends: ["expo", "prettier"],
-  plugins: ["prettier", "simple-import-sort"],
+  plugins: ["prettier", "simple-import-sort", "eslint-plugin-react-compiler"],
   rules: {
     "prettier/prettier": "error",
     "simple-import-sort/imports": "error",
     "simple-import-sort/exports": "error",
+    "react-compiler/react-compiler": "error",
   },
   overrides: [
     {
