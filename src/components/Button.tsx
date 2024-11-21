@@ -1,5 +1,5 @@
 import { MaterialIcons } from "@expo/vector-icons";
-import React, { forwardRef } from "react";
+import React from "react";
 import {
   Text,
   TouchableOpacity,
@@ -16,69 +16,62 @@ interface ButtonProps extends TouchableOpacityProps {
   iconPosition?: "left" | "right";
 }
 
-const Button = forwardRef<TouchableOpacity, ButtonProps>(
-  (
-    {
-      text,
-      iconName,
-      iconSize = 24,
-      style,
-      variant = "primary",
-      iconPosition = "left",
-      ...props
-    },
-    ref,
-  ) => {
-    const { styles, theme } = useStyles(stylesheet);
+const Button = ({
+  text,
+  iconName,
+  iconSize = 24,
+  style,
+  variant = "primary",
+  iconPosition = "left",
+  ...props
+}: ButtonProps) => {
+  const { styles, theme } = useStyles(stylesheet);
 
-    const buttonStyles = [
-      styles.button,
-      variant === "secondary" && styles.buttonSecondary,
-      variant === "outline" && styles.buttonOutline,
-      style,
-    ];
+  const buttonStyles = [
+    styles.button,
+    variant === "secondary" && styles.buttonSecondary,
+    variant === "outline" && styles.buttonOutline,
+    style,
+  ];
 
-    const textStyles = [
-      styles.text,
-      variant === "secondary" && styles.textSecondary,
-      variant === "outline" && styles.textOutline,
-    ];
+  const textStyles = [
+    styles.text,
+    variant === "secondary" && styles.textSecondary,
+    variant === "outline" && styles.textOutline,
+  ];
 
-    const renderContent = () => (
-      <>
-        {iconName && iconPosition === "left" && (
-          <MaterialIcons
-            name={iconName}
-            size={iconSize}
-            color={
-              variant === "primary" ? theme.colors.light : theme.colors.primary
-            }
-            style={styles.iconLeft}
-          />
-        )}
-        <Text style={textStyles}>{text}</Text>
-        {iconName && iconPosition === "right" && (
-          <MaterialIcons
-            name={iconName}
-            size={iconSize}
-            color={
-              variant === "primary" ? theme.colors.light : theme.colors.primary
-            }
-            style={styles.iconRight}
-          />
-        )}
-      </>
-    );
+  const renderContent = () => (
+    <>
+      {iconName && iconPosition === "left" && (
+        <MaterialIcons
+          name={iconName}
+          size={iconSize}
+          color={
+            variant === "primary" ? theme.colors.light : theme.colors.primary
+          }
+          style={styles.iconLeft}
+        />
+      )}
+      <Text style={textStyles}>{text}</Text>
+      {iconName && iconPosition === "right" && (
+        <MaterialIcons
+          name={iconName}
+          size={iconSize}
+          color={
+            variant === "primary" ? theme.colors.light : theme.colors.primary
+          }
+          style={styles.iconRight}
+        />
+      )}
+    </>
+  );
 
-    return (
-      <TouchableOpacity ref={ref} style={buttonStyles} {...props}>
-        <View style={styles.content}>{renderContent()}</View>
-      </TouchableOpacity>
-    );
-  },
-);
-
-Button.displayName = "Button";
+  return (
+    <TouchableOpacity style={buttonStyles} {...props}>
+      <View style={styles.content}>{renderContent()}</View>
+    </TouchableOpacity>
+  );
+};
 
 const stylesheet = createStyleSheet((theme) => ({
   button: {
