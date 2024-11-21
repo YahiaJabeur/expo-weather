@@ -56,7 +56,7 @@ export default function Home() {
           <Text
             testID="feels-like"
             style={styles.feelsLike}
-          >{`Feels like ${forecastData.current.feelslike_c} °C`}</Text>
+          >{`Feels like ${Math.round(forecastData.current.feelslike_c)} °C`}</Text>
           {nextDaysMeasurements && (
             <View style={styles.forecastWrapper}>
               {nextDaysMeasurements.map((measurement, index) => {
