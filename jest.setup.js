@@ -1,4 +1,10 @@
-import "./src/unistyles";
+const { NativeModules } = require("react-native");
 
-jest.mock("react-native/Libraries/EventEmitter/NativeEventEmitter");
+NativeModules.Unistyles = {
+  addListener: jest.fn(),
+  removeListeners: jest.fn(),
+};
+
+require("./src/unistyles");
+
 jest.mock("@testing-library/jest-native/extend-expect");
