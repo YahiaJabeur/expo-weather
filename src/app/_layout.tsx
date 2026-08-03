@@ -29,7 +29,7 @@ const queryClient = new QueryClient({
 export default function RootLayout() {
   return (
     <QueryClientProvider client={queryClient}>
-      <Stack screenOptions={{ headerBackTitleVisible: false }} />
+      <Stack screenOptions={{ headerBackButtonDisplayMode: "minimal" }} />
       <Toast />
     </QueryClientProvider>
   );
