@@ -11,7 +11,7 @@ import {
   TextInput,
   View,
 } from "react-native";
-import { createStyleSheet, useStyles } from "react-native-unistyles";
+import { StyleSheet, useUnistyles } from "react-native-unistyles";
 
 import { Geolocation, getLocationByGeo } from "@/api";
 import Button from "@/components/Button";
@@ -22,7 +22,7 @@ import { storeData } from "@/libs/localStorage";
 
 export default function AddLocation() {
   const [location, setLocation] = useState<Geolocation | string>();
-  const { styles, theme } = useStyles(stylesheet);
+  const { theme } = useUnistyles();
   const inputRef = useRef<TextInput>(null);
   const debouncedLocation = useDebounce(location, 500);
 
@@ -127,7 +127,7 @@ export default function AddLocation() {
   );
 }
 
-const stylesheet = createStyleSheet((theme) => ({
+const styles = StyleSheet.create((theme) => ({
   container: {
     paddingTop: theme.paddings.xl,
     flex: 1,

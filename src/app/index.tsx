@@ -1,12 +1,11 @@
 import { Redirect, Stack } from "expo-router";
 import React from "react";
 import { ActivityIndicator, View } from "react-native";
-import { createStyleSheet, useStyles } from "react-native-unistyles";
+import { StyleSheet } from "react-native-unistyles";
 
 import { getStoredData } from "@/libs/localStorage";
 
 export default function App() {
-  const { styles } = useStyles(stylesheet);
   const location = getStoredData("SELECTED_LOCATION_KEY");
 
   return (
@@ -26,7 +25,7 @@ export default function App() {
   );
 }
 
-const stylesheet = createStyleSheet((theme) => ({
+const styles = StyleSheet.create((theme) => ({
   container: {
     flex: 1,
     justifyContent: "center",

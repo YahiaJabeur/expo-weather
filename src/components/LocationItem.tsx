@@ -1,6 +1,6 @@
 import React from "react";
 import { Text, TouchableOpacity, View } from "react-native";
-import { createStyleSheet, useStyles } from "react-native-unistyles";
+import { StyleSheet } from "react-native-unistyles";
 
 import { City } from "@/types/City";
 
@@ -15,8 +15,6 @@ export const LocationItem = ({
   onPress,
   testID,
 }: Props) => {
-  const { styles } = useStyles(stylesheet);
-
   return (
     <TouchableOpacity
       onPress={() => onPress(url)}
@@ -33,7 +31,7 @@ export const LocationItem = ({
   );
 };
 
-const stylesheet = createStyleSheet((theme) => ({
+const styles = StyleSheet.create((theme) => ({
   container: {
     flexDirection: "row",
     borderBottomWidth: 1,

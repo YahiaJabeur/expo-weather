@@ -6,7 +6,7 @@ import {
   TouchableOpacityProps,
   View,
 } from "react-native";
-import { createStyleSheet, useStyles } from "react-native-unistyles";
+import { StyleSheet, useUnistyles } from "react-native-unistyles";
 
 interface ButtonProps extends TouchableOpacityProps {
   text?: string;
@@ -25,7 +25,7 @@ const Button = ({
   iconPosition = "left",
   ...props
 }: ButtonProps) => {
-  const { styles, theme } = useStyles(stylesheet);
+  const { theme } = useUnistyles();
 
   const buttonStyles = [
     styles.button,
@@ -73,7 +73,7 @@ const Button = ({
   );
 };
 
-const stylesheet = createStyleSheet((theme) => ({
+const styles = StyleSheet.create((theme) => ({
   button: {
     backgroundColor: theme.colors.primary,
     borderRadius: theme.borderRadius,

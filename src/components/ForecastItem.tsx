@@ -1,6 +1,6 @@
 import React from "react";
 import { Image, Text, View } from "react-native";
-import { createStyleSheet, useStyles } from "react-native-unistyles";
+import { StyleSheet } from "react-native-unistyles";
 
 import { Measurements } from "@/types/CurrentWeather";
 
@@ -13,7 +13,6 @@ export const ForecastItem = ({
   item: { condition, temp_c, time },
   testID,
 }: Props) => {
-  const { styles } = useStyles(stylesheet);
   return (
     <View
       style={styles.container}
@@ -31,7 +30,7 @@ export const ForecastItem = ({
   );
 };
 
-const stylesheet = createStyleSheet((theme) => ({
+const styles = StyleSheet.create((theme) => ({
   container: {
     alignItems: "center",
     flexDirection: "column",

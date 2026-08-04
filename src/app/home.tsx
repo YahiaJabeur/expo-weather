@@ -2,14 +2,14 @@ import { Feather } from "@expo/vector-icons";
 import { Link, Stack } from "expo-router";
 import React from "react";
 import { Image, RefreshControl, ScrollView, Text, View } from "react-native";
-import { createStyleSheet, useStyles } from "react-native-unistyles";
+import { StyleSheet, useUnistyles } from "react-native-unistyles";
 
 import { DevButton } from "@/components/DevButton";
 import { ForecastItem } from "@/components/ForecastItem";
 import { useWeatherData } from "@/hooks/use-weather-data";
 
 export default function Home() {
-  const { styles, theme } = useStyles(stylesheet);
+  const { theme } = useUnistyles();
   const { forecastData, refetch, nextDaysMeasurements, isLoading } =
     useWeatherData();
 
@@ -77,7 +77,7 @@ export default function Home() {
   );
 }
 
-const stylesheet = createStyleSheet((theme) => ({
+const styles = StyleSheet.create((theme) => ({
   container: {
     backgroundColor: theme.colors.background,
   },
