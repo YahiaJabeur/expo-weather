@@ -13,8 +13,8 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/images/adaptive-icon.png",
-        "backgroundColor": "#4a90e2"
+        "foregroundImage": "./assets/images/icon.png",
+        "backgroundColor": "#02205E"
       },
       "package": "com.djabeur.expoweather"
     },
@@ -37,8 +37,9 @@
         "expo-splash-screen",
         {
           "image": "./assets/images/splash.png",
-          "resizeMode": "cover",
-          "backgroundColor": "#4a90e2"
+          "imageWidth": 250,
+          "resizeMode": "contain",
+          "backgroundColor": "#00005E"
         }
       ],
       "expo-status-bar"
