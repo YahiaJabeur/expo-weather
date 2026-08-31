@@ -7,7 +7,9 @@ import {
   QueryClientProvider,
 } from "@tanstack/react-query";
 import { Stack } from "expo-router";
+import { StatusBar } from "expo-status-bar";
 import Toast from "react-native-toast-message";
+import { useUnistyles } from "react-native-unistyles";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -27,8 +29,13 @@ const queryClient = new QueryClient({
 });
 
 export default function RootLayout() {
+  const { theme } = useUnistyles();
+
   return (
     <QueryClientProvider client={queryClient}>
+      <StatusBar
+        style={theme.colors.typography === "#ffffff" ? "light" : "dark"}
+      />
       <Stack screenOptions={{ headerBackButtonDisplayMode: "minimal" }} />
       <Toast />
     </QueryClientProvider>
