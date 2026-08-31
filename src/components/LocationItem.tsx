@@ -1,6 +1,7 @@
+import { Feather } from "@expo/vector-icons";
 import React from "react";
 import { Text, TouchableOpacity, View } from "react-native";
-import { StyleSheet } from "react-native-unistyles";
+import { StyleSheet, useUnistyles } from "react-native-unistyles";
 
 import { City } from "@/types/City";
 
@@ -15,18 +16,29 @@ export const LocationItem = ({
   onPress,
   testID,
 }: Props) => {
+  const { theme } = useUnistyles();
+
   return (
     <TouchableOpacity
       onPress={() => onPress(url)}
       style={styles.container}
       testID={testID}
       accessibilityLabel={`Location: ${name}, ${region}, ${country}`}
+      activeOpacity={0.7}
     >
-      <View style={styles.nameContainer}>
+      <Feather
+        name="map-pin"
+        size={18}
+        color={theme.colors.primary}
+        style={styles.pinIcon}
+      />
+      <View style={styles.textContainer}>
         <Text style={styles.name}>{name}</Text>
-        <Text style={styles.region}>{region}</Text>
+        <Text style={styles.sub}>
+          {[region, country].filter(Boolean).join(", ")}
+        </Text>
       </View>
-      <Text style={styles.country}>{country}</Text>
+      <Feather name="chevron-right" size={18} color={theme.colors.lightGray} />
     </TouchableOpacity>
   );
 };
@@ -34,27 +46,26 @@ export const LocationItem = ({
 const styles = StyleSheet.create((theme) => ({
   container: {
     flexDirection: "row",
+    alignItems: "center",
+    paddingHorizontal: theme.paddings.xl,
+    paddingVertical: theme.paddings.xl,
     borderBottomWidth: 1,
     borderColor: theme.colors.lightGray,
-    paddingHorizontal: theme.paddings.lg,
-    paddingVertical: theme.paddings.xl,
-    justifyContent: "space-between",
   },
-  nameContainer: {
-    flexDirection: "column",
-    marginRight: theme.margins.md,
+  pinIcon: {
+    marginRight: theme.margins.lg,
+  },
+  textContainer: {
+    flex: 1,
   },
   name: {
-    fontWeight: "bold",
-    fontSize: theme.typography.lg,
+    fontWeight: "700",
+    fontSize: theme.typography.base,
     color: theme.colors.typography,
-    marginBottom: theme.margins.lg,
+    marginBottom: theme.margins.xs,
   },
-  region: {
+  sub: {
+    fontSize: theme.typography.sm,
     color: theme.colors.gray,
-    alignSelf: "flex-start",
-  },
-  country: {
-    color: theme.colors.primaryLight,
   },
 }));
