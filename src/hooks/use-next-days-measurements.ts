@@ -17,7 +17,7 @@ export const useNextDaysMeasurements = (
       const filteredData = measurements.filter(
         (item) => new Date(item.time) > currentTime,
       );
-      const nextMeasurements = filteredData.slice(0, 5);
+      const nextMeasurements = filteredData.slice(0, 24);
 
       return nextMeasurements;
     } catch (error) {
